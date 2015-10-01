@@ -50,23 +50,6 @@ touch ~/.SNEAKER_CLONED
 fi
 
 
-#sentinel="./Dockerfile"
-#if [ ! -f "${sentinel}" ]; then
-    # We probably are executing from the wget
-    # This may need to change as we make it public and change the branch name.
-#    git clone ${clonesrc}
-#    cd cnvm
-#    git checkout pubbranch
-#    exec ./footlocker-bootstrap.bash
-#fi
-
-# Still here?  OK, then we are ready to go
-#here=$(pwd)
-#if ! [ -f ~/.bash_profile ] && [ -f ~/.profile ]; then
-#    echo "#!/bin/bash" > ~/.bash_profile
-#    cat ~/.profile >> ~/.bash_profile
-#fi
-
 set +e
 groups | grep -q docker
 rc=$?
@@ -77,27 +60,14 @@ if [ "x${rc}" != "x0" ] ; then
     echo "Have to log you out in order to get you in the docker group."
     echo "Please log in again and installation will continue."
     echo "**************************"
- #   is_sctl=$(which systemctl)
- #   if [ -n "${is_sctl}" ]; then
-#	sudo systemctl enable docker
-#    fi
     sudo usermod -aG docker $(logname)
-#   echo $(pwd) > ~/JUSTADDEDTODOCKER
-#    echo <<EOF >> ~/.bash_profile
-#if [ -f ~/JUSTADDEDTODOCKER ]; then
-#    cd ${here}
-#    rm ~/JUSTADDEDTODOCKER
-#    touch /tmp/THISLOGICWASEXECUTED
-#    export JUSTADDED=1
-#    exec ./cnvm/footlocker-bootstrap.bash
-#    exec ./footlocker-bootstrap.bash
-#fi
-#EOF
     touch ~/.BOOTSTRAP_LOGOUT_FLAG
     cat <<EOF >> ~/.bash_profile
 #!/bin/bash
 if [ -f ~/.BOOTSTRAP_LOGOUT_FLAG ]; then 
     rm ~/.BOOTSTRAP_LOGOUT_FLAG && cat ~/.profile > ~/.bash_profile
+    echo "[o] Enter target footlocker hosts (including this one)"
+    echo "[o] Format is: username@host e.g., jm@172.16.157.135"
     cd cnvm && ./footlocker-bootstrap.bash
 
 fi
@@ -105,8 +75,6 @@ EOF
     kill -HUP $PPID
     exit 
 fi
-#    logout
-#fi
 
 declare -a targets
 get_targets
