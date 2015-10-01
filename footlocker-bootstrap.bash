@@ -34,16 +34,16 @@ set -e
 
 if [ ! -f "${DOCKER_INSTALLED}" ]; then
 #you need git - install it first
-sudo apt-get install git -y
-sudo apt-get install docker.io -y
+sudo apt-get install git -y 2>&1 >/dev/null
+sudo apt-get install docker.io -y 2>&1 >/dev/null
 #flag that docker is installed now
-sudo service docker start 
+sudo service docker start 2>&1 >/dev/null
 touch ~/.DOCKER_INSTALLED
 fi
 
 if [ ! -f "${SNEAKERCLONED}" ]; then
 clonesrc="git@github.com:stlalpha/cnvm.git"
-git clone ${clonesrc}
+git clone ${clonesrc} 2>&1 >/dev/null
 cd cnvm
 #flag that you cloned the cnvm dir
 touch ~/.SNEAKER_CLONED
@@ -76,25 +76,7 @@ EOF
     exit 
 fi
 
-#declare -a targets
-#get_targets
-#now=$(date +%Y%m%d%H%M%s)
-#if [ -f targets ]; then
-#    mv targets targets.${now}
-#fi
-#printf "%s\n" "${targets[@]}" > targets
 
-
-#while true ; do
-#    echo "Will this be the master node [Y|N]?"
-#    read line
-#    master=$(echo $line | sed -e 's/^\s+//' | sed -e 's/\s+$//' | cut -c 1 | tr [:upper:] [:lower:] )
-#    if [ ${master} == "y" ] || [ ${master} == "n" ]; then
-#	break
-#    fi
-#done
-
-#new logic block to deal with master/slave
 echo "Will this be the master node [Y|N]?"
     read line
     master=$(echo $line | sed -e 's/^\s+//' | sed -e 's/\s+$//' | cut -c 1 | tr [:upper:] [:lower:] )
@@ -114,9 +96,9 @@ printf "%s\n" "${targets[@]}" > targets
 #prep host packages
 set +e
 status Preparing host packages...
-sudo apt-get update -y
-sudo apt-get upgrade -y
-sudo apt-get install -y build-essential libprotobuf-dev libprotobuf-c0-dev protobuf-c-compiler protobuf-compiler python-protobuf curl
+sudo apt-get update -y 2>&1 >/dev/null
+sudo apt-get upgrade -y 2>&1 >/dev/null
+sudo apt-get install -y build-essential libprotobuf-dev libprotobuf-c0-dev protobuf-c-compiler protobuf-compiler python-protobuf curl 2>&1 >/dev/null
 set -e
 #make the dirz
 status Criu download and build...
@@ -124,10 +106,10 @@ mkdir -p ~/development/src
 cd ~/development/src
 
 #grab criu and build it and install it
-git clone https://github.com/gonkulator/criu.git 
+git clone https://github.com/gonkulator/criu.git 2>&1 >/dev/null
 cd ~/development/src/criu
 make
-sudo make install-criu
+sudo make install-criu 2>&1 >/dev/null
 
 #grab docker and install it
 #status Base docker download and build...this takes a bit of time...
@@ -137,23 +119,23 @@ sudo make install-criu
 #Go experimental
 status Experimental docker download and build....this takes more time...
 cd ~/development/src
-git clone https://github.com/gonkulator/docker.git 
+git clone https://github.com/gonkulator/docker.git 2>&1 >/dev/null
 cd ~/development/src/docker
-git checkout fix-restore-network-cr-combined-1.9 
-make DOCKER_EXPERIMENTAL=1 binary 
+git checkout fix-restore-network-cr-combined-1.9 2>&1 >/dev/null
+make DOCKER_EXPERIMENTAL=1 binary 2>&1 >/dev/null
 #stop the docker service
-sudo service docker stop 
+sudo service docker stop 2>&1 >/dev/null
 #copy new binary
-sudo install -m 0755 bundles/1.9.0-dev/binary/docker /usr/bin/docker
+sudo install -m 0755 bundles/1.9.0-dev/binary/docker /usr/bin/docker 2>&1 >/dev/null
 #start new docker
-sudo service docker start 
+sudo service docker start 2>&1 >/dev/null
 #install weave
 cd ~/development/src
 mkdir -p weave
 cd weave
 status Installing weave...
-curl -L git.io/weave -o weave
-sudo install -m 0755 weave /usr/local/bin/weave
+curl -L git.io/weave -o weave 2>&1 >/dev/null
+sudo install -m 0755 weave /usr/local/bin/weave 2>&1 >/dev/null
 sync
 sleep 2
 mkdir -p ~/sneakers
@@ -167,6 +149,8 @@ EOF
     touch ~/UNCONFIGURED
 fi
 status Footlocker bootstrap complete!
+if [ ${master} == "y" ]; then 
 status Log back in to auto-deploy the first cnvm!
+fi
 status Rebooting node....
 sudo reboot
