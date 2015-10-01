@@ -48,10 +48,12 @@ WHITE=$(echo  '\033[01;37m')
 
 
 	status() {
-	echo "${GREEN}█ ${GRAY} $*${RESTORE}"
+	#echo "${GREEN}█ ${GRAY} $*${RESTORE}"
+	echo "[o] $*"
 }
 	error() {
-		echo "${LRED}█${RED} $*${RESTORE}"
+		#echo "${LRED}█${RED} $*${RESTORE}"
+		echo "[!] ERROR: $*"
 	}
 
 
