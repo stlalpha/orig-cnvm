@@ -19,6 +19,9 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
  
 -----
 
+See an example of the mechanics in motion here:
+https://www.youtube.com/watch?v=J6rvYrFNY-Q
+
 ***Want to setup a N-node test environment?***
 
 **You will need:**
