@@ -1,4 +1,6 @@
 #!/bin/bash
+#Deploy the weave overlay onto the footlocker hosts
+#Jim McBride jm@gonkulator.io 8/28/15
 
 set -e
 
@@ -24,35 +26,11 @@ export clusternetworkcidr=$(echo ${clusternetwork} | awk -F\/ '{print $2}')
 export clusternetworknolastoctet=$(echo ${clusternetworknocidr} | awk -F. '{print $1"."$2"."$3"."}')
 export PID=$$
 
-##colors
-RESTORE=$(echo '\033[0m')
-RED=$(echo '\033[00;31m')
-GREEN=$(echo '\033[00;32m')
-YELLOW=$(echo '\033[00;33m')
-BLUE=$(echo '\033[00;34m')
-MAGENTA=$(echo '\033[00;35m')
-PURPLE=$(echo '\033[00;35m')
-CYAN=$(echo '\033[00;36m')
-DARKGRAY=$(echo '\033[00;90m')
-LIGHTGRAY=$(echo '\033[00;37m')
-LRED=$(echo '\033[01;31m')
-LGREEN=$(echo '\033[01;32m')
-LYELLOW=$(echo '\033[01;33m')
-LBLUE=$(echo '\033[01;34m')
-LMAGENTA=$(echo '\033[01;35m')
-LPURPLE=$(echo '\033[01;35m')
-LCYAN=$(echo '\033[01;36m')
-WHITE=$(echo  '\033[01;37m')
-##colors
-
-
 
 	status() {
-	#echo "${GREEN}█ ${GRAY} $*${RESTORE}"
 	echo "[o] $*"
 }
 	error() {
-		#echo "${LRED}█${RED} $*${RESTORE}"
 		echo "[!] ERROR: $*"
 	}
 
