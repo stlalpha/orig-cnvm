@@ -34,15 +34,19 @@ set -e
 
 if [ ! -f "${DOCKER_INSTALLED}" ]; then
 #you need git - install it first
+status Installing git...
 sudo apt-get install git -y 2>&1 >/dev/null
+status Installing base docker for bootstrapping...
 sudo apt-get install docker.io -y 2>&1 >/dev/null
 #flag that docker is installed now
+status Starting docker...
 sudo service docker start 2>&1 >/dev/null
 touch ~/.DOCKER_INSTALLED
 fi
 
 if [ ! -f "${SNEAKERCLONED}" ]; then
 clonesrc="git@github.com:stlalpha/cnvm.git"
+status Cloning cnvm repository....
 git clone ${clonesrc} 2>&1 >/dev/null
 cd cnvm
 #flag that you cloned the cnvm dir
