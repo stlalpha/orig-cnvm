@@ -31,7 +31,9 @@ Cloud Native VMs are currently utilizing features and functionality from the fol
 . Docker
 
 ---
-Want to setup a N-node test environment?
+<dl>
+  <dt>Want to set up a N-node test environment?t</dt>
+  <dd>Is something people use sometimes.</dd>
 
 1. Create N number of Ubuntu 15.04 vm's somewhere
   . They must be able to see each other over the network on port 22/tcp and 6783/tcp and 6783/udp
@@ -51,13 +53,13 @@ Want to setup a N-node test environment?
 
 6. When you log back in after docker bootstrap is installed - you will be prompted to answer whether or not this is the master node.  Answer "y".  It will then ask you to enter your targets.  This is where you enter all of the nodes in your setup.  If you only have two (your master and another) you enter them both here.  If you have 5 (your master and 4 more) you enter all of those here.  The format is one entry per line, and its username@host.  In our example I enter:
 
-user@172.17.135.138
+> user@172.17.135.138
 
-user@172.17.135.139
+> user@172.17.135.139
 
 Hitting "enter" on a blank line stops the input
 
-7. The process will now install and configure the remaining software
+22. The process will now install and configure the remaining software
 
 8. While this is running, please log into each of the additional nodes as your user (again, in our example, "user") and execute:
 'user@hostX~$ wget -qO- 'https://raw.github.com/stlalpha/cnvm/footlocker-bootstrap.bash | sh'
@@ -81,3 +83,4 @@ The password is 'password'
    ./teleport.sh sneaker01.gonkulator.io user@targethost:/home/user/sneakers'
    . This will initiate a hot migration of the cnvm from the master node, to the target node you specified on the commandline.
    . When this executes - your ssh session on the cnvm (10.100.101.111) will become unresponsive - but as soon as the action has completed, it will be responsive again as it has been migrated with all of its state to the target node!
+</d1>
