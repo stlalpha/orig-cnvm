@@ -18,8 +18,9 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 - Open and Shared
  
 
-**Want to setup a N-node test environment?**
-You will need:
+***Want to setup a N-node test environment?***
+
+**You will need:**
 
 - N number of Ubuntu 15.04 64bit hosts (Minimum of 2 - one master, one regular node)
 - Internet access
