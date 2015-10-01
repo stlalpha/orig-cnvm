@@ -126,6 +126,10 @@ git clone https://github.com/gonkulator/docker.git 2>&1 >/dev/null
 cd ~/development/src/docker
 git checkout fix-restore-network-cr-combined-1.9 2>&1 >/dev/null
 status Compiling docker experimental....this will take some time....
+status Compile time varies but on a typical machine expect ~15 minutes
+status I am going to turn on stdout so you can see that the process is moving and not hung...
+status -- pausing for 10 seconds so you can read this message ---
+sleep 10
 make DOCKER_EXPERIMENTAL=1 binary 2>&1 >/dev/null
 #stop the docker service
 status Stopping docker bootstrap...
