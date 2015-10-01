@@ -31,8 +31,7 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 -----
 **Let's Do It!:**  
 1.  Create N number of Ubuntu 15.04 vm's somewhere
-   - They must be able to see each other over the network on port 22/tcp and 6783/tcp and 6783/udp
-
+   - They must be able to see each other over the network on port 22/tcp and 6783/tcp and 6783/udp  
 2.  Pick a non-root username to use for the installation (in our example the username will be "user")
    - This user must be in the sudoers file
    - You need to generate (or use one that you already have) an ssh keypair and put the public key in each hosts ~/.ssh/authorized\_keys file
