@@ -55,7 +55,8 @@ user@172.17.135.138
 
 user@172.17.135.139
 
-   . Hitting "enter" on a blank line stops the input
+Hitting "enter" on a blank line stops the input
+
 7. The process will now install and configure the remaining software
 
 8. While this is running, please log into each of the additional nodes as your user (again, in our example, "user") and execute:
