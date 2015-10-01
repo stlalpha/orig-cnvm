@@ -101,7 +101,9 @@ printf "%s\n" "${targets[@]}" > targets
 set +e
 status Preparing host packages...
 sudo apt-get update -y 2>&1 >/dev/null
+status apt-get upgrading...
 sudo apt-get upgrade -y 2>&1 >/dev/null
+status Installing pre-req packages for build activities...
 sudo apt-get install -y build-essential libprotobuf-dev libprotobuf-c0-dev protobuf-c-compiler protobuf-compiler python-protobuf curl 2>&1 >/dev/null
 set -e
 #make the dirz
@@ -110,28 +112,30 @@ mkdir -p ~/development/src
 cd ~/development/src
 
 #grab criu and build it and install it
+status Cloning criu fork...
 git clone https://github.com/gonkulator/criu.git 2>&1 >/dev/null
 cd ~/development/src/criu
 make
+status Compiling criu....
 sudo make install-criu 2>&1 >/dev/null
-
-#grab docker and install it
-#status Base docker download and build...this takes a bit of time...
-#cd ~
-#curl -sSL https://get.docker.com/ | sh 
 
 #Go experimental
 status Experimental docker download and build....this takes more time...
 cd ~/development/src
+status Cloning docker experimental fork...
 git clone https://github.com/gonkulator/docker.git 2>&1 >/dev/null
 cd ~/development/src/docker
 git checkout fix-restore-network-cr-combined-1.9 2>&1 >/dev/null
+status Compiling docker experimental....this will take some time....
 make DOCKER_EXPERIMENTAL=1 binary 2>&1 >/dev/null
 #stop the docker service
+status Stopping docker bootstrap...
 sudo service docker stop 2>&1 >/dev/null
 #copy new binary
+status Updating docker bin...
 sudo install -m 0755 bundles/1.9.0-dev/binary/docker /usr/bin/docker 2>&1 >/dev/null
 #start new docker
+status Starting docker experimental...
 sudo service docker start 2>&1 >/dev/null
 #install weave
 cd ~/development/src
