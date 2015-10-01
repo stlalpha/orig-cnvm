@@ -45,7 +45,6 @@ if [ ! -f "${SNEAKERCLONED}" ]; then
 clonesrc="git@github.com:stlalpha/cnvm.git"
 git clone ${clonesrc}
 cd cnvm
-git checkout pubbranch
 #flag that you cloned the cnvm dir
 touch ~/.SNEAKER_CLONED
 fi
