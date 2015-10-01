@@ -47,9 +47,9 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 7. The process will now install and configure the remaining software
 
 8. While this is running, please log into each of the additional nodes as your user (again, in our example, "user") and execute:
-    
+    ```shell
     user@hostX~$ wget -qO- 'https://raw.github.com/stlalpha/cnvm/footlocker-bootstrap.bash | sh
-    
+    ```
 
 9. Follow the prompts - you will be logged out twice.  Once after docker is installed to get you into the right groups and a second time after the bootstrap configuation is complete
 
@@ -62,8 +62,9 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 13. When the master process has completed and all of the other nodes have completed - you are done with the build process, and ready to deploy your first cnvm.
 
 14. Log back into the master node - and it will automatically launch the first cnvm.  When completed, it will be available for connection at 10.100.101.111.  From the master node:
-    
+    ```shell
     user@masternode~$ ssh user@10.100.101.111
+    ```
     The password is 'password'
     
 
