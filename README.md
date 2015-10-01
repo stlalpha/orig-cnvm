@@ -19,7 +19,11 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
  
 
 **Want to setup a N-node test environment?**
+You will need:
 
+- N number of Ubuntu 15.04 64bit hosts (Minimum of 2 - one master, one regular node)
+- Internet access
+- About 30 minutes of clock time
 
 
 1.  Create N number of Ubuntu 15.04 vm's somewhere
@@ -76,4 +80,5 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
     ```
   - This will initiate a hot migration of the cnvm from the master node, to the target node you specified on the commandline.
   - When this executes - your ssh session on the cnvm (10.100.101.111) will become unresponsive - but as soon as the action has completed, it will be responsive again as it has been migrated with all of its state to the target node!
+ 
 16. Congratulations - you live-migrated a running cnvm!
