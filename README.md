@@ -73,4 +73,5 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
     user@masternode~$ cd cnvm
     user@masternode~$ ./teleport.sh sneaker01.gonkulator.io user@targethost:/home/user/sneakers
     ```
-16. test
+- This will initiate a hot migration of the cnvm from the master node, to the target node you specified on the commandline.
+- When this executes - your ssh session on the cnvm (10.100.101.111) will become unresponsive - but as soon as the action has completed, it will be 
