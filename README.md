@@ -20,12 +20,11 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 Here's a video showing the mechanics in motion:
 
 [CNVM - Globetrotter Demo Video ](https://youtu.be/J6rvYrFNY-Q "Globetrot v1.6 Demo")
+
 -----
 
-See an example of the mechanics in motion here:
 
-
-***Want to setup a N-node test environment?***
+***Want to setup your own N-node test environment and play with it?***
 
 **You will need:**
 
