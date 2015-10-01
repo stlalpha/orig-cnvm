@@ -27,4 +27,8 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 2.  Pick a non-root username to use for the installation (in our example the username will be "user")
    - This user must be in the sudoers file
    - You need to generate (or use one that you already have) an ssh keypair and put the public key in each hosts ~/.ssh/authorized\_keys file
-3. Do something else next
+3. Choose one of your machines to be the "master" node.  This is the machine that you will launch the cnvm's from.
+4. Log into the master node as "user" and execute:
+```shell
+user@host1~$ wget -qO- https://raw.github.com/stlalpha/cnvm/footlocker-bootstrap.bash | sh
+```
