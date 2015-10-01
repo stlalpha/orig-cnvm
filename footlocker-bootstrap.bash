@@ -76,6 +76,30 @@ EOF
     exit 
 fi
 
+#declare -a targets
+#get_targets
+#now=$(date +%Y%m%d%H%M%s)
+#if [ -f targets ]; then
+#    mv targets targets.${now}
+#fi
+#printf "%s\n" "${targets[@]}" > targets
+
+
+#while true ; do
+#    echo "Will this be the master node [Y|N]?"
+#    read line
+#    master=$(echo $line | sed -e 's/^\s+//' | sed -e 's/\s+$//' | cut -c 1 | tr [:upper:] [:lower:] )
+#    if [ ${master} == "y" ] || [ ${master} == "n" ]; then
+#	break
+#    fi
+#done
+
+#new logic block to deal with master/slave
+echo "Will this be the master node [Y|N]?"
+    read line
+    master=$(echo $line | sed -e 's/^\s+//' | sed -e 's/\s+$//' | cut -c 1 | tr [:upper:] [:lower:] )
+    if [ ${master} == "y" ]; then
+
 declare -a targets
 get_targets
 now=$(date +%Y%m%d%H%M%s)
@@ -83,14 +107,10 @@ if [ -f targets ]; then
     mv targets targets.${now}
 fi
 printf "%s\n" "${targets[@]}" > targets
-while true ; do
-    echo "Will this be the master node [Y|N]?"
-    read line
-    master=$(echo $line | sed -e 's/^\s+//' | sed -e 's/\s+$//' | cut -c 1 | tr [:upper:] [:lower:] )
-    if [ ${master} == "y" ] || [ ${master} == "n" ]; then
-	break
+break
     fi
-done
+
+
 
 #prep host packages
 set +e
