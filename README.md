@@ -16,11 +16,14 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 - Identical
 - Secure
 - Open and Shared
- 
+
+Here's a video showing the mechanics in motion:
+
+[CNVM - Globetrotter Demo Video ](https://youtu.be/J6rvYrFNY-Q "Globetrot v1.6 Demo")
 -----
 
 See an example of the mechanics in motion here:
-[CNVM - Globetrotter Demo Video ](https://youtu.be/J6rvYrFNY-Q "Mechanic Demo")
+
 
 ***Want to setup a N-node test environment?***
 
