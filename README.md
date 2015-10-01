@@ -69,8 +69,8 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 
 15. Open a second ssh session to the master node.  And teleport (hot migrate) it to one of the other nodes.  To do this simply:
 
-```shell
-user@masternode~$ cd cnvm
-user@masternode~$ ./teleport.sh sneaker01.gonkulator.io user@targethost:/home/user/sneakers
-```
+    ```shell
+    user@masternode~$ cd cnvm
+    user@masternode~$ ./teleport.sh sneaker01.gonkulator.io user@targethost:/home/user/sneakers
+    ```
 16. test
