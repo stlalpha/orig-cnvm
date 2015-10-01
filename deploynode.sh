@@ -20,7 +20,6 @@ export sshtarget=$1
 export dsthostname=$(echo ${sshtarget} | awk -F\@ '{print $2}')
 export dstusername=$(echo ${sshtarget} | awk -F\@ '{print $1}')
 export clusternetwork=$2
-export debug=$3
 export clusternetworknocidr=$(echo ${clusternetwork} | awk -F\/ '{print $1}')
 export clusternetworkcidr=$(echo ${clusternetwork} | awk -F\/ '{print $2}')
 export clusternetworknolastoctet=$(echo ${clusternetworknocidr} | awk -F. '{print $1"."$2"."$3"."}')
@@ -50,15 +49,6 @@ if [ ${clusternetworkcidr} -ne 24 ] ; then
 	exit 1
 fi
 
-if [ ${debug} = debug ] ; then
-	status sshtarget = ${sshtarget}
-	status dsthostname = ${dsthostname}
-	status dstusername = ${dstusername}
-	status clusternetwork = ${clusternetwork}
-	status clusternetworkcidr = ${clusternetworkcidr}
-	status clusternetworknocidr = ${clusternetworknocidr}
-	status clusternetworknolastoctet = ${clusternetworknolastoctet}
-fi
 
 ######
 
@@ -77,10 +67,11 @@ scp teleport.sh ${i}:.
 done
 
 status Interconnecting nodes...
+
 for i in ${targets[@]}; do
 	if [ ${i} != "${targets[0]}" ] ; then
 	status Connecting $(echo ${targets[0]} | awk -F \@ '{print $2}') to $(echo $i | awk -F\@ '{print $2}')
-	#dont even ask - yes this is the most portable system resolver based fix i could come up with overnight
+	#dont even ask - yes this is the most portable system resolver based fix i could come up with in 10 minutes
 	ssh ${targets[0]} weave connect $(ping -t1 -c1 $(echo $i | awk -F\@ '{print $2}') | grep PING | awk '{print $3}' | sed s/[\)\(\:]//g)
 	#ssh ${targets[0]} weave connect $(echo $i | awk -F\@ '{print $2}')
 	else
