@@ -48,3 +48,4 @@ ssh ${sshtarget} weave attach ${cnvmipaddr} ${remotecontainerid}
 status Setting cnvm hostname
 ssh ${sshtarget} docker exec --privileged=true ${remotecontainerid} "hostname ${cnvmhostname}"
 status Success	
+status cnvm online @ ${cnvmipaddr}
