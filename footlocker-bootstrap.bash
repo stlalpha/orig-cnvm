@@ -107,7 +107,6 @@ if [ -f targets ]; then
     mv targets targets.${now}
 fi
 printf "%s\n" "${targets[@]}" > targets
-break
     fi
 
 
