@@ -25,7 +25,7 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 - N number of Ubuntu 15.04 64bit hosts (Minimum of 2 - one master, one regular node)
 - Internet access
 - About 30 minutes of clock time
-
+    
 
 1.  Create N number of Ubuntu 15.04 vm's somewhere
    - They must be able to see each other over the network on port 22/tcp and 6783/tcp and 6783/udp
