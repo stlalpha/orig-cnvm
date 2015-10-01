@@ -17,6 +17,7 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 - Secure
 - Open and Shared
  
+-----
 
 ***Want to setup a N-node test environment?***
 
@@ -27,6 +28,7 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 - Internet access
 - About 30 minutes of clock time  
 
+-----
 
 1.  Create N number of Ubuntu 15.04 vm's somewhere
    - They must be able to see each other over the network on port 22/tcp and 6783/tcp and 6783/udp
