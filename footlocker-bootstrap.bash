@@ -42,12 +42,11 @@ touch ~/.DOCKER_INSTALLED
 fi
 
 if [ ! -f "${SNEAKERCLONED}" ]; then
-#clonesrc="https://github.com/enteon/sneaker-research.git"
-clonesrc="git@github.com:enteon/sneaker-research.git"
+clonesrc="git@github.com:stlalpha/cnvm.git"
 git clone ${clonesrc}
-cd sneaker-research
+cd cnvm
 git checkout pubbranch
-#flag that you cloned the sneaker-research dir
+#flag that you cloned the cnvm dir
 touch ~/.SNEAKER_CLONED
 fi
 
@@ -57,7 +56,7 @@ fi
     # We probably are executing from the wget
     # This may need to change as we make it public and change the branch name.
 #    git clone ${clonesrc}
-#    cd sneaker-research
+#    cd cnvm
 #    git checkout pubbranch
 #    exec ./footlocker-bootstrap.bash
 #fi
@@ -91,7 +90,7 @@ if [ "x${rc}" != "x0" ] ; then
 #    rm ~/JUSTADDEDTODOCKER
 #    touch /tmp/THISLOGICWASEXECUTED
 #    export JUSTADDED=1
-#    exec ./sneaker-research/footlocker-bootstrap.bash
+#    exec ./cnvm/footlocker-bootstrap.bash
 #    exec ./footlocker-bootstrap.bash
 #fi
 #EOF
@@ -100,7 +99,7 @@ if [ "x${rc}" != "x0" ] ; then
 #!/bin/bash
 if [ -f ~/.BOOTSTRAP_LOGOUT_FLAG ]; then 
     rm ~/.BOOTSTRAP_LOGOUT_FLAG && cat ~/.profile > ~/.bash_profile
-    cd sneaker-research && ./footlocker-bootstrap.bash
+    cd cnvm && ./footlocker-bootstrap.bash
 
 fi
 EOF
@@ -176,7 +175,7 @@ if [ ${master} == "y" ]; then
     status Master node: setting up .bash_profile to execute sneaker deployment on reboot...
     cat <<EOF >> ~/.bash_profile
 if [ -f ~/UNCONFIGURED ]; then 
-    cd sneaker-research && ./deploynode.sh foo 10.100.101.0/24 && ./deploysneaker.sh ${targets[0]} stlalpha/myphusion:stockticker sneaker01.gonkulator.io 10.100.101.111/24 && cd - && rm ~/UNCONFIGURED
+    cd cnvm && ./deploynode.sh foo 10.100.101.0/24 && ./deploysneaker.sh ${targets[0]} stlalpha/myphusion:stockticker sneaker01.gonkulator.io 10.100.101.111/24 && cd - && rm ~/UNCONFIGURED
 fi
 EOF
     touch ~/UNCONFIGURED
