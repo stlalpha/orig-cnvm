@@ -29,6 +29,7 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
    - You need to generate (or use one that you already have) an ssh keypair and put the public key in each hosts ~/.ssh/authorized\_keys file
 3. Choose one of your machines to be the "master" node.  This is the machine that you will launch the cnvm's from.
 4. Log into the master node as "user" and execute:
-```shell
-user@host1~$ wget -qO- https://raw.github.com/stlalpha/cnvm/footlocker-bootstrap.bash | sh
-```
+    ```shell
+    user@host1~$ wget -qO- https://raw.github.com/stlalpha/cnvm/footlocker-bootstrap.bash | sh
+    ```
+5. Follow the prompts.  You will be logged out twice.  Once after docker is installed to get you into the right groups and a second time after the bootstrap configuation is complete
