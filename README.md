@@ -73,4 +73,4 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
     user@masternode~$ cd cnvm
     user@masternode~$ ./teleport.sh sneaker01.gonkulator.io user@targethost:/home/user/sneakers```
     
-- Where "targethost" is another one of your non-master nodes that you would like the cnvm to move to
+16. test
