@@ -71,8 +71,6 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 
 ```shell
 user@masternode~$ cd cnvm
-user@masternode~$ ./teleport.sh sneaker01.gonkulator.io user@targethost:/home/user/sneakers```
-
+user@masternode~$ ./teleport.sh sneaker01.gonkulator.io user@targethost:/home/user/sneakers
+```
 16. test
-
-16. Test
