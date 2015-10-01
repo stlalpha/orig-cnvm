@@ -1,4 +1,4 @@
-#!/bin/bash -x
+#!/bin/bash
 #footlocker-host-bootstrap.sh jm@gonkulator.io 8/22/2015
 # Adam Thornton 30 September 2015
 
