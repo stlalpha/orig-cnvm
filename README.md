@@ -32,17 +32,17 @@ Cloud Native VMs are currently utilizing features and functionality from the fol
 
 ---
 <dl>
-  <dt>Want to set up a N-node test environment?t</dt>
-  <dd>Is something people use sometimes.</dd>
+  <dt>Want to set up a N-node test environment?</dt>
+  <dd>Follow these steps:</dd>
 
 1. Create N number of Ubuntu 15.04 vm's somewhere
-  . They must be able to see each other over the network on port 22/tcp and 6783/tcp and 6783/udp
+  * They must be able to see each other over the network on port 22/tcp and 6783/tcp and 6783/udp
 
 2. Pick a non-root username to use for the installation (in our example the username will be "user")
-  . This user must be in the sudoers file 
-  . You need to generate (or use one that you already have) an ssh keypair and put the public key in each hosts ~/.ssh/authorized_keys file
-  . A quick example of how to do this is located here: http://www.linuxproblem.org/art_9.html
-  . Use the same keypair for each machine in your setup (you can use multiple if you like, but each machine must be able to ssh into each machine)
+  * This user must be in the sudoers file 
+  * You need to generate (or use one that you already have) an ssh keypair and put the public key in each hosts ~/.ssh/authorized_keys file
+  * A quick example of how to do this is located here: http://www.linuxproblem.org/art_9.html
+  * Use the same keypair for each machine in your setup (you can use multiple if you like, but each machine must be able to ssh into each machine)
 
 3. Choose one of your machines to be the "master" node.  This is the machine that you will launch the cnvm's from.
 
@@ -53,10 +53,9 @@ Cloud Native VMs are currently utilizing features and functionality from the fol
 
 6. When you log back in after docker bootstrap is installed - you will be prompted to answer whether or not this is the master node.  Answer "y".  It will then ask you to enter your targets.  This is where you enter all of the nodes in your setup.  If you only have two (your master and another) you enter them both here.  If you have 5 (your master and 4 more) you enter all of those here.  The format is one entry per line, and its username@host.  In our example I enter:
 
-> user@172.17.135.138
-
-> user@172.17.135.139
-
+```user@172.17.135.138
+user@172.17.135.139
+```
 Hitting "enter" on a blank line stops the input
 
 22. The process will now install and configure the remaining software
