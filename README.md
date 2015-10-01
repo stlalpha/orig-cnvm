@@ -21,9 +21,13 @@ The Cloud Native VM platform allows you to deploy Virtual Machines that are:
 Cloud Native VMs are currently utilizing features and functionality from the following open source projects:
 
 . Linux 
+
 . Runc
+
 . CRIU
+
 . Weave
+
 . Docker
 
 ---
