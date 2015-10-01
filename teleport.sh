@@ -3,14 +3,7 @@
 #jim@gonkulator.io 8/21/2015
 #pubbranch test
 
-	set -e
-#load and export the ssh -o StrictHostKeyChecking=no-agent and all the priv keys
-
-#	eval `ssh-agent` 2>&1 >/dev/null
-#	ssh-add ~/keys/* 2>/dev/null
-
-#	vestigal cruft from when I took the container to snapshot as $1 - will remove once we get the GUI nailed up -jm
-#	export container=$1
+set -e
 
 export cnvmname=$1
 export container=$(docker inspect $(docker ps | grep ${cnvmname} | awk '{print $1}') | head -3 | grep Id | awk '{print $2}' | sed s/\"//g | sed s/\,//g)
@@ -24,42 +17,14 @@ export PID=$$
 ##test 2
 #functions / defines
 
-##colors
-if [ -t 1 ]; then
-    ncolors=$(tput colors)
-    if [ -n "${ncolors}" ] && [ ${ncolors} -gt -1 ]; then
-	RESTORE=$(echo '\033[0m')
-	RED=$(echo '\033[00;31m')
-	GREEN=$(echo '\033[00;32m')
-	YELLOW=$(echo '\033[00;33m')
-	BLUE=$(echo '\033[00;34m')
-	MAGENTA=$(echo '\033[00;35m')
-	PURPLE=$(echo '\033[00;35m')
-	CYAN=$(echo '\033[00;36m')
-	DARKGRAY=$(echo '\033[00;90m')
-	LIGHTGRAY=$(echo '\033[00;37m')
-	LRED=$(echo '\033[01;31m')
-	LGREEN=$(echo '\033[01;32m')
-	LYELLOW=$(echo '\033[01;33m')
-	LBLUE=$(echo '\033[01;34m')
-	LMAGENTA=$(echo '\033[01;35m')
-	LPURPLE=$(echo '\033[01;35m')
-	LCYAN=$(echo '\033[01;36m')
-	WHITE=$(echo  '\033[01;37m')
-    fi
-fi
-##colors
 
 	status() {
-	#echo "${PURPLE}[${LGREEN}-${PURPLE}]${CYAN} $*${RESTORE}"
-	echo "${GREEN}█${GRAY} $*${RESTORE}"
-#	echo "o $* "
+	echo "[o] $* "
 }
+	
 	error() {
-		#echo "${PURPLE}[${LRED}!${PURPLE}]${LRED} $*${RESTORE}"
-		echo "${LRED}█${RED} $*${RESTORE}"
-#	echo "- $*"
-	}
+	echo "[-] ERROR: $*"
+}
 
 	remote_ok() {
 	status Checking remote landing-zone...
@@ -78,10 +43,6 @@ fi
 
 	sanitize_it() {
 		status Sanitizing ${hosty}
-		#echo "rm -rf ~/sneakers/*" | ssh ${hosty} $(< /dev/fd/0) 2>&1 > /dev/null
-		#echo "docker kill \$(docker ps | grep -v weave | grep -v CONTAINER | awk '{print \$1}')" | ssh ${hosty} $(< /dev/fd/0)
-		#echo "docker rm \$(docker ps -a | grep -v weave | grep -v CONTAINER | awk '{print \$1}')" | ssh ${hosty} $(< /dev/fd/0)
-		#echo "docker rmi \$(docker images | grep -v weaveworks | grep -v REPO |  awk '{print \$3}')" | ssh ${hosty} $(< /dev/fd/0)
 	}
 
 	snapshot() {
@@ -92,7 +53,6 @@ fi
 	        status Checkpointing sneaker ${GRAY}${container}
 	        docker checkpoint --image-dir=${IMAGEDIR} --work-dir=/tmp ${container} >/dev/null
 	        status Checkpoint success...
-	        #Get rid of the "/" in the image name because its a pain in the ass to deal with on the cmdline
 	        SOURCEIMAGE=$(docker inspect ${container} | grep \"Image\": | tail -1 | awk '{print $2}' | sed s/\"//g | sed s/,//g | sed s/\\//-/g)
 	        DESTIMAGE=${IMAGEDIR}/${SOURCEIMAGE}-$$.tar.gz
 	        export DESTIMAGE
@@ -122,7 +82,7 @@ fi
 		ssh -o StrictHostKeyChecking=no ${hosty} "docker exec --privileged=true ${REMOTESNEAKER} route add -net 0.0.0.0 netmask 0.0.0.0 gw 172.17.42.1 || /bin/true" 2>&1 >/dev/null
 		status Updating remote native IP addr and routes COMPLETE
 		status Bringing up Weave sneaker-LAN.....
-		#yes - the below is actually necessary if you want weave to create the arp entry
+		#jiggle-the-handle :) 
 		ssh -o StrictHostKeyChecking=no ${hosty} weave attach ${cnvmweaveipaddr} ${REMOTESNEAKER} 2>/dev/null
 		ssh -o StrictHostKeyChecking=no ${hosty} weave detach ${cnvmweaveipaddr} ${REMOTESNEAKER} 2>/dev/null
 		ssh -o StrictHostKeyChecking=no ${hosty} weave attach ${cnvmweaveipaddr} ${REMOTESNEAKER} 2>/dev/null
@@ -135,11 +95,13 @@ fi
 
 
 	#main
-	
 
 	status Checking remote site
+	
 	remote_ok
+	
 	status Sanitizing site
+	
 	sanitize_it
 
 	status Snapshotting sneaker: ${container}
@@ -151,5 +113,7 @@ fi
 	teleport ${IMAGEDIR} ${dst}
 	
 	status Cleaning up...
+	
 	docker rm ${container}
+	
 	status DONE
